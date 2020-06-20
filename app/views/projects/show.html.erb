@@ -12,5 +12,12 @@
 	</div>
 
 	<h3 class="pb-3 my-6 text-2xl font-bold border-b">Tasks</h3>
-
+	
+	<ul class="mb-6 leading-relaxed">
+		<% @project.tasks.each do |task| %>
+		 <%= check_box_tag "complete", task.complete %>
+		 <%= task.body %>
+		<% end %>
+	</ul>
+	<%= render "tasks/form", task: @task%>
 </div>
