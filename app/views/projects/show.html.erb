@@ -10,7 +10,16 @@
 		<p class="font-bold text-gray-900">Description:</p>
 		<%= @project.description %>
 	</div>
+	
+	<% if @project.users.any? %>
+		<h3 class="pb-3 my-6 text-2xl font-bold border-b">Collaborators</h3>
 
+		<ul class="pl-4 list-disc">
+			<% @project.users.each do |user|%>
+				<li><%= user.name %></li>
+			<% end %>
+		</ul>
+	<% end %>
 	<h3 class="pb-3 my-6 text-2xl font-bold border-b">Tasks</h3>
 
 	<ul id="<%= dom_id(@project) %>_tasks" class="mb-6 leading-relaxed" data-controller="tasks">
