@@ -6,7 +6,26 @@ export default class extends Controller {
   	const taskId = event.target.parentElement.dataset.taskId;
   	let data;
 
-  	console.log("taskId", taskId);
+  	if (event.target.checked == true) {
+  		// sending params to backend by backticks??
+  		data = `task[id]=${taskId}&task[complete]=true`;
+  	}else {
+  		data = `task[id]=${taskId}&task[complete]=false`;
+  	}
+
+  	Rails.ajax({
+  		url: event.target.parentElement.dataset.taskUrl,
+  		type: "patch",
+  		data: data,
+  		error: (errors) => {
+  			console.log(errors);
+  		},
+  		success: (response) => {
+  			event.target.parentElement.classList.toggle("complete");
+  		}
+
+  	})
   }
+
 
 }

@@ -35,9 +35,14 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    @task = @project.tasks.find(params[:task][:id])
     respond_to do |format|
+      if params[:task][:complete] == true
+        @task.update(complete: true)
+      end
+
       if @task.update(task_params)
-        format.html { redirect_to project_path(@project), notice: 'Task was successfully updated.' }
+        format.json { render :show, status: :ok, location: project_path(@project)}
       else
         format.html { redirect_to project_path(@project) }
 
@@ -66,6 +71,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:body, :project_id, :complete)
+      params.require(:task).permit(:id, :body, :project_id, :complete)
     end
 end
