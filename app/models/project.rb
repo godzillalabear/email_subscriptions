@@ -1,8 +1,11 @@
 class Project < ApplicationRecord
   belongs_to :user
+  has_many :project_users
+  has_many :users, through: :project_user
+
   has_many :tasks, dependent: :destroy
 
-  # def author(user)
-    # self.projects_users.where(user: user)
-  # end
+  def author(user)
+    self.project_users.where(user: user)
+  end
 end
