@@ -31,6 +31,9 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
+        (@project.users.uniq - [current_user]).each do |user|
+          ProjectMailer.with(project: @project, user: user, author: current_user).user_added_to_project.deliver_later
+        end
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else

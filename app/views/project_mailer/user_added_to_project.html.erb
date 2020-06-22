@@ -1,5 +1,7 @@
-<h1>Project#user_added_to_project</h1>
+<p>Hi <%= @user.name %>,</p>
 
 <p>
-  <%= @greeting %>, find me in app/views/project_mailer/user_added_to_project.html.erb
+	<%= @author.name %> added you to a new project called <%= link_to @project.title, project_url(@project), target: :_blank %>
 </p>
+
+<%= link_to "View the project", project_url(@project), target: :_blank %>

@@ -6,8 +6,10 @@ class ProjectMailer < ApplicationMailer
   #   en.project_mailer.user_added_to_project.subject
   #
   def user_added_to_project
-    @greeting = "Hi"
+    @user = params[:user]
+    @project = params[:project]
+    @author = params[:author]
 
-    mail to: "to@example.org"
+    mail to: @user.email, subject: "#{@author.name} added you to #{@project.title}"
   end
 end
