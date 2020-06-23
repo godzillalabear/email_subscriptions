@@ -6,9 +6,11 @@ class TaskMailer < ApplicationMailer
   #   en.task_mailer.task_created.subject
   #
   def task_created
-    @greeting = "Hi"
+    @task = params[:task]
+    @user = params[:user]
+    @author = params[:author]
 
-    mail to: "to@example.org"
+    mail to: @user.email, subject: "#{@task.project.title}: A new task was created by #{@author.name}"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
