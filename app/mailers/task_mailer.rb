@@ -19,8 +19,10 @@ class TaskMailer < ApplicationMailer
   #   en.task_mailer.task_completed.subject
   #
   def task_completed
-    @greeting = "Hi"
+    @task = params[:task]
+    @user = params[:user]
+    @author = params[:author]
 
-    mail to: "to@example.org"
+    mail to: @user.email, subject: "#{@task.project.title}: A task was completed by #{@author.name}"
   end
 end

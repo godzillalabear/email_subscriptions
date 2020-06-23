@@ -42,6 +42,9 @@ class TasksController < ApplicationController
     respond_to do |format|
       if params[:task][:complete] == true
         @task.update(complete: true)
+        (@project.users.uniq - [current_user]).each do |user|
+          TaskMailer.with(task: @task, user: user, author: current_user).task_completed.deliver_later
+        end
       end
 
       if @task.update(task_params)

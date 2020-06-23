@@ -1,5 +1,8 @@
-<h1>Task#task_completed</h1>
+<p>Hi <%= @user.name %>,</p>
 
-<p>
-  <%= @greeting %>, find me in app/views/task_mailer/task_completed.html.erb
-</p>
+<p><%= @author.name %> completed a task for <%= link_to @task.project.title, project_url(@task.project), target: :_blank %>.</p>
+<p>Task: </p>
+<p style="padding: 10px; background-color: #efefef;">
+	<%= @task.body %>
+</p>	
+<%= link_to "View the project", project_url(@task.project), target: :_blank %>
