@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   
+  match "/users/unsubscribe/:unsubscribe_hash" => "emails#unsubscribe", as: "unsubscribe", via: :all
+
   devise_scope :user do
     authenticated :user do
       root "projects#index"
