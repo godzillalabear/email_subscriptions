@@ -45,6 +45,26 @@
       <p class="text-sm text-grey-dark pt-2 italic">(we need your current password to confirm your changes)</p>
     </div>
 
+    <hr class="border mt-6 mb-3" />
+
+    <h3 class="heading text-xl font-bold mb-4">Email preferences</h3>
+
+    <div class="mb-6">
+      <%= f.check_box :notify_when_added_to_project %>
+      <%= f.label :notify_when_added_to_project %>
+    </div>
+
+    <div class="mb-6">
+      <%= f.check_box :notify_when_task_created %>
+      <%= f.label :notify_when_task_created %>
+    </div>
+
+    <div class="mb-6">
+      <%= f.check_box :notify_when_task_completed %>
+      <%= f.label :notify_when_task_completed %>
+    </div>
+
+
     <div class="mb-6">
       <%= f.submit "Update", class: "btn btn-default" %>
     </div>
