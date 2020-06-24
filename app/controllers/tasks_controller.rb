@@ -42,12 +42,12 @@ class TasksController < ApplicationController
     respond_to do |format|
       if params[:task][:complete] == true
         @task.update(complete: true)
-        (@project.users.uniq - [current_user]).each do |user|
-          TaskMailer.with(task: @task, user: user, author: current_user).task_completed.deliver_later
-        end
       end
 
       if @task.update(task_params)
+        (@project.users.uniq - [current_user]).each do |user|
+          TaskMailer.with(task: @task, user: user, author: current_user).task_completed.deliver_later
+        end
         format.json { render :show, status: :ok, location: project_path(@project)}
       else
         format.html { redirect_to project_path(@project) }
